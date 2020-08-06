@@ -7,23 +7,26 @@
 <body>
 <div>
     <h1>Конвертер валют</h1>
-    <form method="post" autocomplete="off">
+<!--    <form method="get" autocomplete="off">-->
         <p><input name = "login"
-                  id = "login"
-                  autofocus
-                  required
-                  placeholder = "Логин" />
-        </p>
+                      id = "login"
+                      autofocus
+                      required
+                      placeholder = "Логин" />
+</p>
         <p><input name = "password"
                   type = "password"
                   placeholder = "Пароль"
                   required
                   id = "password" />
         </p>
-        <p><input type = "submit"
-                  value = "Войти" />
+        <p>
+        <form action="converter" method="get">
+            <input type = "submit"
+                   value = "Войти"/>
+        </form>
         </p>
-    </form>
+<!--    </form>-->
 </div>
 </body>
 </html>

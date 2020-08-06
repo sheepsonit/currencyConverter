@@ -1,5 +1,7 @@
 package org.example.CurrencyConverter.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,7 +9,9 @@ import javax.persistence.Id;
 
 @Entity
 public class Valute {
-    public Valute() {}
+    public Valute() {
+    }
+
     public Valute(String valute_id, String numCode, String charCode, Integer nominal, String name, float value) {
         this.valute_id = valute_id;
         this.numCode = numCode;
@@ -17,8 +21,12 @@ public class Valute {
         this.value = value;
         System.out.println(this.valute_id + " " + this.numCode + " " + this.charCode + " " + this.nominal + " " + this.name + " " + this.value);
     }
+
+    //    @GeneratedValue(generator="system-uuid")
+//    @GenericGenerator(name="system-uuid", strategy = "uuid")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String valute_id;
 
     private String numCode;
@@ -26,6 +34,9 @@ public class Valute {
     private Integer nominal;
     private String name;
     private float value;
+
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
     public String getValute_id() {
         return this.valute_id;
@@ -37,7 +48,7 @@ public class Valute {
         this.numCode = numCode;
     }
 
-    public String getCharCode() { return this.charCode;}
+    public String getCharCode() { return this.charCode; }
     public void setCharCode(String charCode) {
         this.charCode = charCode;
     }

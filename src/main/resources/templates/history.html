@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>История запросов</title>
+</head>
+<body>
+<h1>Result</h1>
+<p th:each="history : ${histories}"/>
+<p th:text="'id: ' + ${history.id}" />
+<p th:text="'initValue: ' + ${history.initCurrencyName}" />
+<p th:text="'targetValue: ' + ${history.targetCurrencyName}" />
+<p th:text="'initValue: ' + ${history.initCurrency}" />
+<p th:text="'targetValue: ' + ${history.targetCurrency}" />
+<a href="/converter">Convert another currency</a>
+</body>
+</html>

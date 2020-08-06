@@ -1,6 +1,7 @@
 package org.example.CurrencyConverter;
 
 import org.example.CurrencyConverter.domain.Valute;
+import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -11,11 +12,12 @@ import javax.xml.parsers.*;
 import java.io.*;
 import java.util.ArrayList;
 
+@Component
 public class XMLParser {
 
     private static ArrayList<Valute> valutesList = new ArrayList<>();
 
-    public void readXMLData() {
+    public ArrayList<Valute> readXMLData() {
         try {
             // Создается построитель документа
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -33,11 +35,9 @@ public class XMLParser {
                 Node valute = valutes.item(i);
                 // Если нода не текст, то это книга - заходим внутрь
                 if (valute.getNodeType() != Node.TEXT_NODE) {
-                    System.out.println("AAAA:");
                     NamedNodeMap valuteAttributes = valute.getAttributes();
                     NodeList valuteProperties = valute.getChildNodes();
                     createValute(valuteAttributes, valuteProperties);
-                    System.out.println("===========>>>>");
                 }
             }
             for (Valute val : valutesList) {
@@ -47,11 +47,10 @@ public class XMLParser {
         } catch (ParserConfigurationException | SAXException | IOException ex) {
             ex.printStackTrace(System.out);
         }
+        return valutesList;
     }
 
     public void createValute(NamedNodeMap valuteAttributes, NodeList valuteProperties) {
-        System.out.println(" createValute(NodeList valuteProperties)::");
-        System.out.println("BB:" + valuteAttributes.getLength());
         Valute valute = new Valute();
         for (int k = 0; k < valuteAttributes.getLength(); k++) {
             valute.setValute_id(valuteAttributes.item(k).getNodeValue());
@@ -86,6 +85,5 @@ public class XMLParser {
             }
         }
         valutesList.add(valute);
-
     }
 }

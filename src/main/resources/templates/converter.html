@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Конвертер</title>
+    <script>
+   function changeValue(value) {
+   alert(value)
+
+   }
+  </script>
 </head>
 <body>
+<h1>Result</h1>
+<form action="#" th:action="@{/history}" th:object="${history}" method="post">
+<tr th:if="${valutes.empty}">
+    <td colspan="2"> No Valutes Available </td>
+</tr>
+<select name = "initCurrency" onchange="changeValue(this.value)">
+    <option th:each="valute : ${valutes}"
+            th:text="${valute.charCode + ' (' + valute.name + ')'}">
+    </option>
+</select>
 
+<select name="targetCurrency" onchange="change(value)">
+    <option th:each="valute : ${valutes}"
+            th:text="${valute.charCode + ' (' + valute.name + ')'}">
+    </option>
+</select>
+
+<p><input name = "initValue"
+          id = "initValue"
+          th:field="*{initCurrency}"
+          required
+           />
+</p>
+
+<input name = "targetValue"
+          id = "targetValue"
+          th:field="*{targetCurrency}"
+          required
+          onchange="targetValue.value = this.value * 20"
+/>
+
+    <input type = "submit"
+           value = "Конвертировать"/>
+</form>
 </body>
 </html>
+
+<--initValue.value = valutes[this.selectedIndex].value-->
